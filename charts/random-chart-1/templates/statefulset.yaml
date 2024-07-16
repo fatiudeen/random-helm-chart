@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ .Release.Name }}-statefulset
+  namespace: {{ .Values.namespace }}
+  labels:
+    app: {{ .Release.Name }}
+spec:
+  serviceName: "{{ .Release.Name }}-service"
+  replicas: 2
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}
+    spec:
+      containers:
+      - name: redis
+        image: redis:latest
+        ports:
+        - containerPort: 6379

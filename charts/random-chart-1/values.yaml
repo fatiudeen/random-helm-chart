@@ -1,0 +1,4 @@
+namespace: argo-depl
+
+redis:
+  usePassword: false
